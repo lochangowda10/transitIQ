@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Network &amp; stations — TransitIQ</title>
+  <meta name="description" content="The full TransitIQ station list for Namma Metro's Purple and Green lines, with order, segment distances, station counts and the Majestic interchange.">
+  <meta name="theme-color" content="#F4F0E6">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23141414'/%3E%3Cpath d='M32 2a30 30 0 0 1 0 60z' fill='%23007A53'/%3E%3Cpath d='M32 2a30 30 0 0 0 0 60z' fill='%236A2C91'/%3E%3Ccircle cx='32' cy='32' r='28' fill='none' stroke='%23F4F0E6' stroke-width='3'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='Arial Narrow,Arial' font-size='22' font-weight='bold' fill='%23F4F0E6'%3ETQ%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container-xxl">
+      <div class="header-inner">
+        <a class="brand" href="index.html" aria-label="TransitIQ home">
+          <svg class="roundel" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <circle cx="32" cy="32" r="30" fill="#141414"></circle>
+            <path d="M32 2a30 30 0 0 1 0 60z" fill="#007A53"></path>
+            <path d="M32 2a30 30 0 0 0 0 60z" fill="#6A2C91"></path>
+            <circle cx="32" cy="32" r="27.5" fill="none" stroke="#F4F0E6" stroke-width="3"></circle>
+            <text x="32" y="41" text-anchor="middle" font-family="Bahnschrift Condensed, Arial Narrow, sans-serif" font-size="22" font-weight="700" fill="#F4F0E6">TQ</text>
+          </svg>
+          <span class="brand-text">
+            <span class="brand-name">TransitIQ</span>
+            <span class="brand-sub">Bengaluru Metro</span>
+          </span>
+        </a>
+
+        <nav aria-label="Primary">
+          <ul class="nav-list">
+            <li><a href="index.html">Plan</a></li>
+            <li><a href="network.html" aria-current="page">Network</a></li>
+            <li><a href="index.html#fares">Fares</a></li>
+            <li><a href="index.html#how">How it works</a></li>
+          </ul>
+        </nav>
+
+        <p class="header-meta">Namma Metro<strong>Purple + Green</strong></p>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero" aria-labelledby="network-title">
+      <div class="container-xxl">
+        <p class="eyebrow">Network / all stations</p>
+        <h1 id="network-title">Two lines. Every station. One interchange.</h1>
+        <p class="lede">The full TransitIQ station register, in corridor order. Use this page as a reference or fall back to it when the schematic map is not the right tool.</p>
+
+        <div class="network-summary" aria-label="Network summary">
+          <span class="summary-chip"><span class="line-dot line-dot--purple"></span><span data-stat="stations">69</span> stations</span>
+          <span class="summary-chip"><span class="line-dot line-dot--green"></span><span data-stat="lines">2</span> corridors</span>
+          <span class="summary-chip"><span data-stat="interchanges">1</span> interchange</span>
+          <span class="summary-chip"><span data-stat="network-km">86</span> km of track</span>
+          <a class="summary-chip" href="index.html#planner-form">Plan a journey →</a>
+        </div>
+      </div>
+    </section>
+
+    <noscript>
+      <div class="container-xxl" style="padding-top: 1.5rem;">
+        <p class="callout"><strong>JavaScript required</strong> The station tables on this page are generated from the network dataset. Enable JavaScript to view them.</p>
+      </div>
+    </noscript>
+
+    <section class="line-block" aria-labelledby="purple-title">
+      <div class="container-xxl">
+        <div class="line-block-head">
+          <div>
+            <p class="eyebrow">Corridor 01 · East–West</p>
+            <h2 class="line-block-title" id="purple-title"><span class="line-bar line-bar--purple" aria-hidden="true"></span>Purple Line</h2>
+          </div>
+          <div>
+            <p>Whitefield (Kadugodi) to Challaghatta, running through Baiyappanahalli, MG Road, Majestic and Kengeri. This is the longer of the two corridors and meets the Green Line only at Majestic.</p>
+            <div class="line-facts">
+              <span class="line-fact"><strong data-line-count="purple">38</strong>Stations</span>
+              <span class="line-fact"><strong data-line-km="purple">47.0</strong>Route km, approx.</span>
+              <span class="line-fact"><strong>1</strong>Interchange</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="station-table-wrap">
+          <table class="station-table" id="purple-stations-table">
+            <caption>Purple Line stations, east to west. Segment distances are estimates.</caption>
+            <thead>
+              <tr>
+                <th scope="col" class="station-order">#</th>
+                <th scope="col">Station</th>
+                <th scope="col" class="seg-km">To next station</th>
+                <th scope="col">Notes</th>
+              </tr>
+            </thead>
+            <tbody id="purple-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="line-block" aria-labelledby="green-title">
+      <div class="container-xxl">
+        <div class="line-block-head">
+          <div>
+            <p class="eyebrow">Corridor 02 · North–South</p>
+            <h2 class="line-block-title" id="green-title"><span class="line-bar line-bar--green" aria-hidden="true"></span>Green Line</h2>
+          </div>
+          <div>
+            <p>Madavara to Silk Institute, through Yeshwanthpur, Majestic, Lalbagh, Jayanagar and Banashankari. The line crosses the Purple corridor at Majestic in the centre of the city.</p>
+            <div class="line-facts">
+              <span class="line-fact"><strong data-line-count="green">32</strong>Stations</span>
+              <span class="line-fact"><strong data-line-km="green">39.2</strong>Route km, approx.</span>
+              <span class="line-fact"><strong>1</strong>Interchange</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="station-table-wrap">
+          <table class="station-table" id="green-stations-table">
+            <caption>Green Line stations, north to south. Segment distances are estimates.</caption>
+            <thead>
+              <tr>
+                <th scope="col" class="station-order">#</th>
+                <th scope="col">Station</th>
+                <th scope="col" class="seg-km">To next station</th>
+                <th scope="col">Notes</th>
+              </tr>
+            </thead>
+            <tbody id="green-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight" aria-labelledby="next-title">
+      <div class="container-xxl">
+        <div class="panel">
+          <div class="panel-head">
+            <h3 id="next-title">Ready to plan?</h3>
+            <a class="back-link" href="index.html">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M13 8H3M7 4 3 8l4 4"></path>
+              </svg>
+              Back to planner
+            </a>
+          </div>
+          <div class="panel-body">
+            <p>Return to the planner to search a journey, see the fare slab applied and draw the route on the schematic map. Fares range from ₹10 to ₹60 in the model; times include a transfer buffer and a platform wait.</p>
+            <p class="fare-note">Schematic map, not to scale. Fares and times are estimates. Station order follows the public Namma Metro corridor sequence; segment distances are approximations for this project.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container-xxl">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <svg class="roundel" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <circle cx="32" cy="32" r="30" fill="#F4F0E6"></circle>
+            <path d="M32 2a30 30 0 0 1 0 60z" fill="#007A53"></path>
+            <path d="M32 2a30 30 0 0 0 0 60z" fill="#6A2C91"></path>
+            <circle cx="32" cy="32" r="27.5" fill="none" stroke="#141414" stroke-width="3"></circle>
+            <text x="32" y="41" text-anchor="middle" font-family="Bahnschrift Condensed, Arial Narrow, sans-serif" font-size="22" font-weight="700" fill="#141414">TQ</text>
+          </svg>
+          <div>
+            <p class="footer-title">TransitIQ</p>
+            <p class="footer-tagline">A route intelligence sketchbook for Namma Metro's Purple and Green corridors. Built as a static frontend, start to finish.</p>
+          </div>
+        </div>
+
+        <nav class="footer-col" aria-label="Footer">
+          <h4>Planner</h4>
+          <ul>
+            <li><a href="index.html#planner-form">Plan a journey</a></li>
+            <li><a href="index.html#map-section">Network map</a></li>
+            <li><a href="index.html#fares">Fares</a></li>
+            <li><a href="index.html#how">Method</a></li>
+            <li><a href="network.html">All stations</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer-col">
+          <h4>About this project</h4>
+          <ul>
+            <li>TransitIQ — a Skill Lab project</li>
+            <li>Frontend only · HTML, CSS, Bootstrap, JavaScript</li>
+            <li>No servers, APIs or trackers</li>
+            <li>Schematic map, not to scale. Fares and times are estimates.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span><strong>TransitIQ</strong> — a Skill Lab project</span>
+        <span>Schematic map, not to scale. Fares and times are estimates.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="vendor/jquery-3.7.1.min.js"></script>
+  <script src="vendor/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TransitIQ — Bengaluru Metro Route Intelligence</title>
+  <meta name="description" content="Plan the fastest Namma Metro journey across the Purple and Green lines. Real station order, distance-based fare slabs, an interactive schematic map and recent trips.">
+  <meta name="theme-color" content="#F4F0E6">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23141414'/%3E%3Cpath d='M32 2a30 30 0 0 1 0 60z' fill='%23007A53'/%3E%3Cpath d='M32 2a30 30 0 0 0 0 60z' fill='%236A2C91'/%3E%3Ccircle cx='32' cy='32' r='28' fill='none' stroke='%23F4F0E6' stroke-width='3'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='Arial Narrow,Arial' font-size='22' font-weight='bold' fill='%23F4F0E6'%3ETQ%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container-xxl">
+      <div class="header-inner">
+        <a class="brand" href="index.html" aria-label="TransitIQ home">
+          <svg class="roundel" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <circle cx="32" cy="32" r="30" fill="#141414"></circle>
+            <path d="M32 2a30 30 0 0 1 0 60z" fill="#007A53"></path>
+            <path d="M32 2a30 30 0 0 0 0 60z" fill="#6A2C91"></path>
+            <circle cx="32" cy="32" r="27.5" fill="none" stroke="#F4F0E6" stroke-width="3"></circle>
+            <text x="32" y="41" text-anchor="middle" font-family="Bahnschrift Condensed, Arial Narrow, sans-serif" font-size="22" font-weight="700" fill="#F4F0E6">TQ</text>
+          </svg>
+          <span class="brand-text">
+            <span class="brand-name">TransitIQ</span>
+            <span class="brand-sub">Bengaluru Metro</span>
+          </span>
+        </a>
+
+        <nav aria-label="Primary">
+          <ul class="nav-list">
+            <li><a href="index.html" aria-current="page">Plan</a></li>
+            <li><a href="network.html">Network</a></li>
+            <li><a href="#fares">Fares</a></li>
+            <li><a href="#how">How it works</a></li>
+          </ul>
+        </nav>
+
+        <p class="header-meta">Namma Metro<strong>Purple + Green</strong></p>
+      </div>
+    </div>
+  </header>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <div class="ticker-list">
+        <span class="ticker-item"><span class="line-dot line-dot--purple"></span>Whitefield</span>
+        <span class="ticker-item"><span class="line-dot line-dot--purple"></span>MG Road</span>
+        <span class="ticker-item"><span class="line-dot line-dot--purple"></span>Majestic · interchange</span>
+        <span class="ticker-item"><span class="line-dot line-dot--green"></span>Yeshwanthpur</span>
+        <span class="ticker-item"><span class="line-dot line-dot--purple"></span>Kengeri</span>
+        <span class="ticker-item"><span class="line-dot line-dot--green"></span>Jayanagar</span>
+        <span class="ticker-item"><span class="line-dot line-dot--purple"></span>Baiyappanahalli</span>
+        <span class="ticker-item"><span class="line-dot line-dot--green"></span>Silk Institute</span>
+        <span class="ticker-item"><span class="line-dot line-dot--green"></span>Madavara</span>
+        <span class="ticker-item"><span class="line-dot line-dot--purple"></span>Challaghatta</span>
+        <span class="ticker-item"><span class="line-dot line-dot--green"></span>Lalbagh</span>
+        <span class="ticker-item"><span class="line-dot line-dot--green"></span>Peenya</span>
+      </div>
+      <div class="ticker-list">
+        <span class="ticker-item"><span class="line-dot line-dot--purple"></span>Whitefield</span>
+        <span class="ticker-item"><span class="line-dot line-dot--purple"></span>MG Road</span>
+        <span class="ticker-item"><span class="line-dot line-dot--purple"></span>Majestic · interchange</span>
+        <span class="ticker-item"><span class="line-dot line-dot--green"></span>Yeshwanthpur</span>
+        <span class="ticker-item"><span class="line-dot line-dot--purple"></span>Kengeri</span>
+        <span class="ticker-item"><span class="line-dot line-dot--green"></span>Jayanagar</span>
+        <span class="ticker-item"><span class="line-dot line-dot--purple"></span>Baiyappanahalli</span>
+        <span class="ticker-item"><span class="line-dot line-dot--green"></span>Silk Institute</span>
+        <span class="ticker-item"><span class="line-dot line-dot--green"></span>Madavara</span>
+        <span class="ticker-item"><span class="line-dot line-dot--purple"></span>Challaghatta</span>
+        <span class="ticker-item"><span class="line-dot line-dot--green"></span>Lalbagh</span>
+        <span class="ticker-item"><span class="line-dot line-dot--green"></span>Peenya</span>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+    <noscript>
+      <div class="container-xxl" style="padding-top: 1.5rem;">
+        <p class="callout"><strong>JavaScript required</strong> TransitIQ runs the route search in your browser. Enable JavaScript to plan a journey.</p>
+      </div>
+    </noscript>
+
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container-xxl">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Namma Metro route intelligence · Bengaluru</p>
+            <h1 class="display-title" id="hero-title">Know your<br><span class="display-mark">next move</span><span class="display-dot">.</span></h1>
+            <p class="lede">Two corridors, sixty-nine stations and a single interchange at Majestic. TransitIQ searches the Purple and Green lines station by station, prices the distance and draws the route on a map you can click.</p>
+
+            <ul class="hero-facts" aria-label="Network at a glance">
+              <li class="fact">
+                <span class="fact-num">69</span>
+                <span class="fact-label">Stations mapped</span>
+              </li>
+              <li class="fact">
+                <span class="fact-num">02</span>
+                <span class="fact-label">Metro corridors</span>
+              </li>
+              <li class="fact">
+                <span class="fact-num">01</span>
+                <span class="fact-label">Interchange</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="hero-planner">
+            <form class="planner-ticket" id="planner-form" novalidate aria-labelledby="planner-title">
+              <span class="ticket-notch ticket-notch--left" aria-hidden="true"></span>
+              <span class="ticket-notch ticket-notch--right" aria-hidden="true"></span>
+
+              <div class="ticket-head">
+                <p class="eyebrow" id="planner-title">Journey planner</p>
+                <span class="ticket-ref">TQ / BLR–01</span>
+              </div>
+
+              <div class="ticket-fields">
+                <div class="field">
+                  <label class="field-label" for="origin-input" id="origin-label">From</label>
+                  <div class="combo">
+                    <input class="combo-input" id="origin-input" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="origin-listbox" aria-labelledby="origin-label" autocomplete="off" spellcheck="false" placeholder="Search a station">
+                    <button class="combo-clear" id="origin-clear" type="button" aria-label="Clear origin" hidden>×</button>
+                    <ul class="combo-list" id="origin-listbox" role="listbox" aria-labelledby="origin-label" hidden></ul>
+                  </div>
+                  <p class="field-hint" id="origin-hint">Start typing, or click a station on the map.</p>
+                </div>
+
+                <div class="swap-row">
+                  <label class="field-label" for="destination-input" id="destination-label">To</label>
+                  <button class="swap-btn" id="swap-btn" type="button" aria-label="Swap origin and destination">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                      <path d="M2 5h10M9 2l3 3-3 3"></path>
+                      <path d="M14 11H4M7 8l-3 3 3 3"></path>
+                    </svg>
+                    <span>Swap</span>
+                  </button>
+                </div>
+
+                <div class="field">
+                  <div class="combo">
+                    <input class="combo-input" id="destination-input" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="destination-listbox" aria-labelledby="destination-label" autocomplete="off" spellcheck="false" placeholder="Search a station">
+                    <button class="combo-clear" id="destination-clear" type="button" aria-label="Clear destination" hidden>×</button>
+                    <ul class="combo-list" id="destination-listbox" role="listbox" aria-labelledby="destination-label" hidden></ul>
+                  </div>
+                  <p class="field-hint" id="destination-hint">Peak and off-peak waits are added separately.</p>
+                </div>
+
+                <p class="planner-error" id="planner-error" role="alert"></p>
+              </div>
+
+              <div class="ticket-bottom">
+                <label class="peak-toggle">
+                  <span class="switch">
+                    <input type="checkbox" id="peak-toggle">
+                    <span class="switch-track" aria-hidden="true"></span>
+                  </span>
+                  <span class="switch-copy">
+                    <span class="switch-title">Peak hours</span>
+                    <span class="switch-hint" id="peak-hint">Adds 2 min wait per leg</span>
+                  </span>
+                </label>
+                <button class="btn-plan" type="submit">
+                  Plan journey
+                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                    <path d="M3 10h13M11 5l5 5-5 5"></path>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="ticket-meta">
+                <span>Single journey · fare by distance</span>
+                <a href="#fares">Fare table</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results-section" id="journey" aria-labelledby="journey-title">
+      <div class="container-xxl">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">02 / Journey</p>
+            <h2 class="section-title" id="journey-title">Your route</h2>
+          </div>
+          <p class="section-note">The fastest scheduled path by ride time, transfer buffer and platform wait. Change the peak setting to see the estimate move.</p>
+        </div>
+
+        <div class="results-grid">
+          <div class="results-panel" id="results" role="region" aria-live="polite" aria-label="Journey results">
+            <div class="empty-state">
+              <p class="eyebrow">Nothing planned yet</p>
+              <h3>Two stations. One fastest path.</h3>
+              <p>Choose an origin and destination above, or try one of these real journeys. Everything is calculated in this browser — no accounts, no tracking.</p>
+              <div class="sample-routes">
+                <button class="sample-btn" type="button" data-origin="whitefield" data-destination="challaghatta">Whitefield → Challaghatta</button>
+                <button class="sample-btn" type="button" data-origin="whitefield" data-destination="silk-institute">Whitefield → Silk Institute</button>
+                <button class="sample-btn" type="button" data-origin="madavara" data-destination="silk-institute">Madavara → Silk Institute</button>
+              </div>
+            </div>
+          </div>
+
+          <aside class="recent-panel" aria-labelledby="recent-title">
+            <div class="recent-head">
+              <h3 id="recent-title">Recent trips</h3>
+              <button class="recent-clear" id="recent-clear" type="button" hidden>Clear all</button>
+            </div>
+            <div class="recent-list" id="recent-list">
+              <p class="recent-empty">Planned journeys will appear here.</p>
+            </div>
+            <p class="recent-note">Stored only in this browser. Up to five trips. Nothing is sent anywhere.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="map-section" aria-labelledby="map-title">
+      <div class="container-xxl">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">03 / Network map</p>
+            <h2 class="section-title" id="map-title">The two lines, schematically.</h2>
+          </div>
+          <p class="section-note">A diagram, not a geography lesson. Station positions are evenly spaced along each corridor so the order is readable.</p>
+        </div>
+
+        <div class="map-shell">
+          <div class="map-toolbar">
+            <div class="legend" aria-label="Map legend">
+              <span class="legend-item"><span class="legend-swatch legend-swatch--purple"></span>Purple Line</span>
+              <span class="legend-item"><span class="legend-swatch legend-swatch--green"></span>Green Line</span>
+              <span class="legend-item"><span class="legend-swatch legend-swatch--route"></span>Your route</span>
+              <span class="legend-item"><span class="legend-swatch legend-swatch--station"></span>Station</span>
+            </div>
+            <button class="map-reset" id="map-reset" type="button">
+              <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" focusable="false">
+                <path d="M3 8a5 5 0 1 1 1.5 3.5M3 12V8h4"></path>
+              </svg>
+              Reset selection
+            </button>
+          </div>
+
+          <div class="map-canvas" id="map-canvas">
+            <svg class="map-svg" id="network-map" role="group" aria-labelledby="map-svg-title" aria-describedby="map-svg-desc"></svg>
+            <div class="map-tooltip" id="map-tooltip" aria-hidden="true" hidden></div>
+          </div>
+
+          <p class="map-hint" id="map-hint">Hover or focus a station for its name. Click a station to set the origin, then another to set the destination.</p>
+        </div>
+
+        <details class="station-fallback">
+          <summary>Station list — text alternative to the map</summary>
+          <div class="station-fallback-grid" id="station-fallback-grid"></div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section" id="fares" aria-labelledby="fares-title">
+      <div class="container-xxl">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">04 / Fares &amp; method</p>
+            <h2 class="section-title" id="fares-title">What it costs. How it thinks.</h2>
+          </div>
+          <p class="section-note">The planner is deliberately transparent: fixed distance slabs, a posted interchange buffer and a visible algorithm.</p>
+        </div>
+
+        <div class="fares-grid">
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Fare slabs</h3>
+              <span class="line-chip line-chip--interchange">Estimate</span>
+            </div>
+            <div class="panel-body">
+              <table class="fare-table">
+                <caption>Applied to the sum of segment distances on the chosen route</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Distance</th>
+                    <th scope="col">Fare</th>
+                  </tr>
+                </thead>
+                <tbody id="fare-rows">
+                  <tr data-min="0" data-max="2"><td>0 – 2 km</td><td class="fare-amount">₹10</td></tr>
+                  <tr data-min="2" data-max="4"><td>2 – 4 km</td><td class="fare-amount">₹20</td></tr>
+                  <tr data-min="4" data-max="8"><td>4 – 8 km</td><td class="fare-amount">₹30</td></tr>
+                  <tr data-min="8" data-max="12"><td>8 – 12 km</td><td class="fare-amount">₹40</td></tr>
+                  <tr data-min="12" data-max="18"><td>12 – 18 km</td><td class="fare-amount">₹50</td></tr>
+                  <tr data-min="18" data-max="999"><td>Over 18 km</td><td class="fare-amount">₹60</td></tr>
+                </tbody>
+              </table>
+              <p class="fare-note">Fares here are a planning estimate based on the slabs above, not a BMRCL fare quotation. Real fares can change and may differ by card type.</p>
+            </div>
+          </div>
+
+          <div class="panel" id="how">
+            <div class="panel-head">
+              <h3>How it works</h3>
+              <span class="line-chip line-chip--interchange">Dijkstra</span>
+            </div>
+            <div class="panel-body">
+              <div class="method-steps">
+                <div class="method-step">
+                  <span class="step-num">01</span>
+                  <div>
+                    <h4>Build the graph</h4>
+                    <p>Each station is a node. Consecutive stations on a line are joined by an edge weighted at <code>km × 2.5</code> minutes, rounded to the nearest minute.</p>
+                  </div>
+                </div>
+                <div class="method-step">
+                  <span class="step-num">02</span>
+                  <div>
+                    <h4>Search for the fastest path</h4>
+                    <p>Dijkstra's algorithm explores the network from the origin and settles each station at its lowest known time. The first time the destination is settled, the fastest path is known.</p>
+                  </div>
+                </div>
+                <div class="method-step">
+                  <span class="step-num">03</span>
+                  <div>
+                    <h4>Pay for the change</h4>
+                    <p>The search tracks which line you arrive on. Switching between Purple and Green at Majestic costs an extra 4 minutes, so a one-change route is only chosen when it genuinely wins.</p>
+                  </div>
+                </div>
+                <div class="method-step">
+                  <span class="step-num">04</span>
+                  <div>
+                    <h4>Add waiting, then price the trip</h4>
+                    <p>Each boarding leg adds 2 minutes of platform wait off-peak or 5 minutes at peak. Distance is summed along the path and matched to the fare slab.</p>
+                  </div>
+                </div>
+              </div>
+              <p class="callout"><strong>Honesty note</strong> This is a static teaching model. It does not know live train positions, disruption, walking time inside stations or accessibility requirements. Treat every number as an estimate.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container-xxl">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <svg class="roundel" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <circle cx="32" cy="32" r="30" fill="#F4F0E6"></circle>
+            <path d="M32 2a30 30 0 0 1 0 60z" fill="#007A53"></path>
+            <path d="M32 2a30 30 0 0 0 0 60z" fill="#6A2C91"></path>
+            <circle cx="32" cy="32" r="27.5" fill="none" stroke="#141414" stroke-width="3"></circle>
+            <text x="32" y="41" text-anchor="middle" font-family="Bahnschrift Condensed, Arial Narrow, sans-serif" font-size="22" font-weight="700" fill="#141414">TQ</text>
+          </svg>
+          <div>
+            <p class="footer-title">TransitIQ</p>
+            <p class="footer-tagline">A route intelligence sketchbook for Namma Metro's Purple and Green corridors. Built as a static frontend, start to finish.</p>
+          </div>
+        </div>
+
+        <nav class="footer-col" aria-label="Footer">
+          <h4>Planner</h4>
+          <ul>
+            <li><a href="#planner-form">Plan a journey</a></li>
+            <li><a href="#map-section">Network map</a></li>
+            <li><a href="#fares">Fares</a></li>
+            <li><a href="#how">Method</a></li>
+            <li><a href="network.html">All stations</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer-col">
+          <h4>About this project</h4>
+          <ul>
+            <li>TransitIQ — a Skill Lab project</li>
+            <li>Frontend only · HTML, CSS, Bootstrap, JavaScript</li>
+            <li>No servers, APIs or trackers</li>
+            <li>Schematic map, not to scale. Fares and times are estimates.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span><strong>TransitIQ</strong> — a Skill Lab project</span>
+        <span>Schematic map, not to scale. Fares and times are estimates.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="vendor/jquery-3.7.1.min.js"></script>
+  <script src="vendor/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
